@@ -5,3 +5,5 @@ Accept: application/json
 ###
 GET http://localhost:8090/hello-world-bean
 Accept: application/json
+
+###
