@@ -44,8 +44,8 @@ export class ListTodosComponent implements OnInit {
   }
 
   deleteTodo(id) {
-    this.todoDataService.deleteTodo('u', id).subscribe(
-      response =>
-    )
+    // this.todoDataService.deleteTodo('u', id).subscribe(
+    //   response =>
+    // )
   }
 }
