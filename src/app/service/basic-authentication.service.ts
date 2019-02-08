@@ -21,7 +21,7 @@ export class BasicAuthenticationService {
   }
 
   isUserLoggedIn() {
-    const user = sessionStorage.getItem(AUTHENTICATED_USER);
+    let user = sessionStorage.getItem(AUTHENTICATED_USER);
     return !(user === null);
   }
 
@@ -40,21 +40,37 @@ export class BasicAuthenticationService {
     }
 
   }
+  //
+  // executeAuthenticationService(username, password) {
+  //   const basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+  //
+  //   const headers = new HttpHeaders({
+  //     Authorization: basicAuthHeaderString
+  //   });
+  //   return this.httpClient.get<AuthenticationBean>(`${API_URL}/basicauth`, {headers}).pipe(
+  //     map(
+  //       data => {
+  //         sessionStorage.setItem('AUTHENTICATED_USER', username);
+  //         sessionStorage.setItem(TOKEN, basicAuthHeaderString);
+  //         return data;
+  //       }
+  //     )
+  //   );
+  // }
 
-  executeAuthenticationService(username, password) {
-    const basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+  executeJWTAuthenticationService(username, password) {
 
-    const headers = new HttpHeaders({
-      Authorization: basicAuthHeaderString
-    });
-    return this.httpClient.get<AuthenticationBean>(`${API_URL}/basicauth`, {headers}).pipe(
+    return this.httpClient.post<any>(`${API_URL}/authenticate`, {
+      username, password
+    }).pipe(
       map(
         data => {
-          sessionStorage.setItem('AUTHENTICATED_USER', username);
-          sessionStorage.setItem(TOKEN, basicAuthHeaderString);
+          sessionStorage.setItem(AUTHENTICATED_USER, username);
+          sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
           return data;
         }
       )
     );
   }
+
 }

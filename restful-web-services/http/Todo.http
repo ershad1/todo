@@ -1,5 +1,17 @@
 ### Get request with a header
-GET http://localhost:8090/users/u/todos
+GET http://localhost:8090/users/in28minutes/todos
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbjI4bWludXRlcyIsImV4cCI6MTU1MDI0MDU1NiwiaWF0IjoxNTQ5NjM1NzU2fQ.7GnpyXeL4xtSWwo-K3CEZReGDnXFVpJN7NCbenHatvlDaA_ZpuM1j4xjsNOKpEM7_qh55LtXm5t9NsNoEENKiQ
 Accept: application/json
 
 ###
+
+POST http://localhost:8090/authenticate
+Content-Type: application/json
+
+{
+  "username": "in28minutes",
+  "password": "dummy"
+}
+
+###
+

@@ -6,7 +6,7 @@ export class Todo {
   id: number;
   description: string;
   targetDate: Date;
-  isComplete: boolean;
+  isDone: boolean;
 
   constructor() {
   }
@@ -44,15 +44,15 @@ export class ListTodosComponent implements OnInit {
   }
 
   refreshTodos() {
-    this.todoDataService.retrieveAllTodos('asdfsaf').subscribe(
+    this.todoDataService.retrieveAllTodos('in28minutes').subscribe(
       response => this.todos = response
     );
   }
 
   deleteTodo(id) {
-    this.todoDataService.deleteTodo('u', id).subscribe(
+    this.todoDataService.deleteTodo('in28minutes', id).subscribe(
       response => {
-        this.message = `Delete of Todo ${id} Successful`
+        this.message = `Delete of Todo ${id} Successful`;
         this.refreshTodos();
       }
     )
