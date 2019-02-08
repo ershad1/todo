@@ -3,6 +3,11 @@ import {TodoDataService} from '../service/data/todo-data.service';
 import {Router} from '@angular/router';
 
 export class Todo {
+  id: number;
+  description: string;
+  targetDate: Date;
+  isComplete: boolean;
+
   constructor() {
   }
 }
