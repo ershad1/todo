@@ -36,22 +36,21 @@ public class TodoJpaResource {
 
   @DeleteMapping("/jpa/users/{username}/todos/{id}")
   public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable long id) {
-    Todo todo = todoHardCodedService.deleteById(id);
-    if (todo != null) {
-      return ResponseEntity.noContent().build();
-    }
+    todoRepository.deleteById(id);
     return ResponseEntity.notFound().build();
   }
 
   @PutMapping("/jpa/users/{username}/todos/{id}")
   public ResponseEntity<Todo> updateTodo(@PathVariable String username, @PathVariable long id, @RequestBody Todo todo) {
-    Todo updatedTodo = todoHardCodedService.save(todo);
+    todo.setUsername(username);
+    Todo updatedTodo = todoRepository.save(todo);
     return new ResponseEntity<Todo>(todo, HttpStatus.OK);
   }
 
   @PostMapping("/jpa/users/{username}/todos")
-  public ResponseEntity<Void> saveTodo(@PathVariable String username, @RequestBody Todo todo) {
-    Todo createdTodo = todoHardCodedService.save(todo);
+  public ResponseEntity<Void> createTodo(@PathVariable String username, @RequestBody Todo todo) {
+    todo.setUsername(username);
+    Todo createdTodo = todoRepository.save(todo);
 
     //Location
     //Get current resource url
